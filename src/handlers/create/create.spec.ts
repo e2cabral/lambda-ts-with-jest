@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent } from 'aws-lambda';
-import create from './create';
+import { handle } from './create';
 import { badRequest, noContent } from '../../helpers/http-helpers';
 
 const mockRequest = (body: any) => ({
@@ -18,8 +18,8 @@ const mockRequest = (body: any) => ({
 } as APIGatewayProxyEvent);
 
 describe('Create Handler', () => {
-  test('Should return 204 on success', () => {
-    const httpResponse = create(mockRequest({
+  test('Should return 204 on success', async () => {
+    const httpResponse = await handle(mockRequest({
       publicationDate: new Date(),
       author: 'Me',
       pages: 230,
@@ -33,14 +33,14 @@ describe('Create Handler', () => {
     expect(httpResponse).toEqual(noContent());
   });
 
-  test('Should return 400 if no body was provided', () => {
-    const httpResponse = create(mockRequest(null));
+  test('Should return 400 if no body was provided', async () => {
+    const httpResponse = await handle(mockRequest(null));
 
     expect(httpResponse).toEqual(badRequest(new Error('A body should be provided.')));
   });
 
-  test('Should return 400 if author was not provided', () => {
-    const httpResponse = create(mockRequest({
+  test('Should return 400 if author was not provided', async () => {
+    const httpResponse = await handle(mockRequest({
       publicationDate: new Date(),
       pages: 230,
       subject: 'A couple that need time to understand each other',
@@ -53,8 +53,8 @@ describe('Create Handler', () => {
     expect(httpResponse).toEqual(badRequest(new Error('Author was not provided.')));
   });
 
-  test('Should return 400 if pages was not provided', () => {
-    const httpResponse = create(mockRequest({
+  test('Should return 400 if pages was not provided', async () => {
+    const httpResponse = await handle(mockRequest({
       publicationDate: new Date(),
       author: 'Me',
       subject: 'A couple that need time to understand each other',
@@ -67,8 +67,8 @@ describe('Create Handler', () => {
     expect(httpResponse).toEqual(badRequest(new Error('Pages was not provided.')));
   });
 
-  test('Should return 400 if price was not provided', () => {
-    const httpResponse = create(mockRequest({
+  test('Should return 400 if price was not provided', async () => {
+    const httpResponse = await handle(mockRequest({
       publicationDate: new Date(),
       author: 'Me',
       pages: 230,
