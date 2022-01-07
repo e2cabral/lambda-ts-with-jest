@@ -6,8 +6,8 @@ Resources:
   CreateBooks:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: handlers/create/ .
-      Handler: create.handle
+      CodeUri: .
+      Handler: build/handlers/create/create.handle
       Runtime: nodejs14.x
       Timeout: 30
       Events:
@@ -17,4 +17,16 @@ Resources:
             Path: /books
             Method: post
 
-
+  GetBooks:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: build/handlers/get-books/get-books.handle
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        CreateBooks:
+          Type: Api
+          Properties:
+            Path: /books
+            Method: get
