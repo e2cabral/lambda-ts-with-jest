@@ -11,3 +11,8 @@ export const validateCreateBooks = (book: Book) => {
   if (!book.price) throw new Error('Price was not provided.');
   if (!book.rating) throw new Error('Rating was not provided.');
 };
+
+export const validateGetBooks = (perPage: string | undefined, currentPage: string | undefined) => {
+  if (!perPage) throw new Error('perPage parameter is required.');
+  if (!currentPage) throw new Error('currentPage parameter is required.');
+};
