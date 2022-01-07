@@ -3,7 +3,7 @@ import { Book } from '../../domain/book.model';
 import { Validator } from '../../validation/book/validator';
 import { badRequest, noContent } from '../../helpers/http-helpers';
 
-const create = (event: APIGatewayProxyEvent) => {
+const handle = (event: APIGatewayProxyEvent) => {
   try {
     const book = JSON.parse(event.body || 'null') as Book;
 
@@ -15,4 +15,4 @@ const create = (event: APIGatewayProxyEvent) => {
   }
 };
 
-export default create;
+export default handle;
