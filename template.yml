@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Sample SAM Template for lambda
+
+Resources:
+  CreateBooks:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: handlers/create/ .
+      Handler: app.main
+      Runtime: node14.18.x
+      Timeout: 30
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /books
+            Method: post
