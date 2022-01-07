@@ -1,6 +1,6 @@
 import { Book } from '../../domain/book.model';
 
-export const Validator = (book: Book) => {
+export const validator = (book: Book) => {
   if (!book) throw new Error('A body should be provided.');
   if (!book.author) throw new Error('Author was not provided.');
   if (!book.pages) throw new Error('Pages was not provided.');
