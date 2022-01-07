@@ -1,18 +1,16 @@
-import { APIGatewayProxyEvent } from 'aws-lambda';
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { Book } from '../../domain/book.model';
-import { validator } from '../../validation/book/validator';
+import { validateCreateBooks } from '../../validation/book/validator';
 import { badRequest, noContent } from '../../helpers/http-helpers';
 
-const handle = (event: APIGatewayProxyEvent) => {
+export const handle = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
-    const book = JSON.parse(event.body || 'null') as Book;
+    const book = JSON.parse(event.body!) as Book;
 
-    validator(book);
+    validateCreateBooks(book);
 
     return noContent();
   } catch (e) {
     return badRequest((e as Error));
   }
 };
-
-export default handle;
