@@ -16,3 +16,7 @@ export const validateGetBooks = (perPage: string | undefined, currentPage: strin
   if (!perPage) throw new Error('perPage parameter is required.');
   if (!currentPage) throw new Error('currentPage parameter is required.');
 };
+
+export const validateGetBook = (id: string | undefined) => {
+  if (!id) throw new Error('An invalid id was provided.');
+};
