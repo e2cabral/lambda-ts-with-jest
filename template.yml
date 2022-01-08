@@ -30,3 +30,17 @@ Resources:
           Properties:
             Path: /books
             Method: get
+
+  GetBook:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: build/handlers/get-book/get-book.handle
+      Runtime: nodejs14.x
+      Timeout: 30
+      Events:
+        CreateBooks:
+          Type: Api
+          Properties:
+            Path: /books/{id}
+            Method: get
