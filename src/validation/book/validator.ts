@@ -20,3 +20,8 @@ export const validateGetBooks = (perPage: string | undefined, currentPage: strin
 export const validateGetBook = (id: string | undefined) => {
   if (!id) throw new Error('An invalid id was provided.');
 };
+
+export const validateUpdateBook = (body: any, id: string) => {
+  if (!id) throw new Error('No possible to update. Provide a valid id');
+  if (!body) throw new Error('No body was provided.');
+};
